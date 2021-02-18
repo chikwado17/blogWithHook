@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import BlogForm from './components/Blog/BlogForm';
+import BlogList from './components/Blog/BlogList';
+import { data } from './components/data/data';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+const App = () => {
+  const [posts, setPosts] = useState(data);
+
+  const addNewPost = (post) => {
+    setPosts(prevState => [...prevState, post]);
+  } 
+
+  return(
+    <div style={{marginTop:'20px'}} className="ui container">
+        <div>
+          <BlogList posts={posts}/>
+        </div><br/>
+        <h3>Add Post</h3>
+        <BlogForm addNewPost={addNewPost} />
     </div>
   );
 }
-
 export default App;
